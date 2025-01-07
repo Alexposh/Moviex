@@ -12,9 +12,9 @@ export default function Promoted () {
     const [index, setIndex] = useState<number>(0);
 
     useEffect(() => {
-        axios.get('http://localhost/MoviexPhp/api.php')
+        axios.get('http://localhost/MoviexPhp/api.php?table=movie&amount=5')
             .then(response => { 
-                console.log(response.data);
+                // console.log(response.data);
                 setMovies(response.data);
             }) 
             .catch(error => { 
@@ -23,7 +23,7 @@ export default function Promoted () {
 
         const interval = setInterval(() => {
             setIndex(prevIndex => (prevIndex + 1) % movies.length);
-            console.log("randomising number :", index);
+            // console.log("randomising number :", index);
         }, 5000);
 
         return () => clearInterval(interval);
@@ -34,7 +34,8 @@ export default function Promoted () {
 
     return(
         <>
-        <h2>Promoted</h2>
+        <div style={{display:"flex", border:"1px solid black", justifyContent:"center"}}>
+        <h2 >Promoted</h2>
         {highlightedElement && <ImageCard key={highlightedElement.movie_id} title={highlightedElement.title}  width={350}/>}
         {/* {restElements.map((movie) => {
             return (
@@ -42,6 +43,7 @@ export default function Promoted () {
             )
         })} */}
         <SideList sidemovies={restElements} />
+        </div>
         </>
     )
 }

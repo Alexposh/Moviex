@@ -38,7 +38,8 @@ export default function Container(){
     
 
     return(
-        <>    
+        <>   
+
         <Promoted />
         <Featured />
         <Popularartists />

@@ -10,9 +10,7 @@ function ImageCard({title, width}: {title: string, width:number}) {
         <Card.Body>
           <Card.Text>
             {title}
-          </Card.Text>
-          {/* <p>{tagline}</p> */}
-          {/* <p>Average rating: {vote_average}</p><p>From {vote_count} votes</p> */}
+          </Card.Text>         
         </Card.Body>
       </Card>
       
