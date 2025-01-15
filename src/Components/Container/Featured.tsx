@@ -10,7 +10,7 @@ export default function Featured (){
     const [index, setIndex] = useState<number>(0);
 
     useEffect(() => {
-        axios.get('http://localhost/MoviexPhp/api.php?table=movie&amount=10')
+        axios.get('http://localhost:8080/movie/10')
             .then(response => { 
                 // console.log(response.data);
                 setMovies(response.data);
@@ -30,7 +30,7 @@ export default function Featured (){
     const featuredMovies: Movie[] = movies.slice(index, index + 2);
     return(
         <div style={{display:"flex", border:"1px solid black", justifyContent:"center"}}>
-           {featuredMovies.map((movie) => ( <FeaturedArticle movie={movie}/>))}
+           {featuredMovies.map((movie) => ( <FeaturedArticle key={movie.movie_id} movie={movie}/>))}
         </div>
         
     )
