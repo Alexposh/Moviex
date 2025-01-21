@@ -8,7 +8,11 @@ import ArtistPage from './pages/ArtistPage';
 import Footer from './Components/Footer';
 import ArtistsPage from './pages/ArtistsPage';
 import NotFoundPage from './pages/NotFoundPage';
+import { QueryClient, QueryClientProvider } from 'react-query';
 
+
+
+const queryClient = new QueryClient();
 
 function App() {
 const router = createBrowserRouter([
@@ -20,11 +24,12 @@ const router = createBrowserRouter([
   {
     path: '/movies',  
     element: <MoviesPage />,
+    children:[{
+      path: '/movies/:movieId',
+      element: <MoviePage />,
+    }]
   },
-  {
-    path: '/movie',
-    element: <MoviePage />,
-  },
+  
   {
     path: '/artist',
     element: <ArtistPage />,
@@ -36,11 +41,13 @@ const router = createBrowserRouter([
 ])
   return (
     <>
-    <Header />
-      <hr />
-    {/* <Container /> */}
-    <RouterProvider router={router} />
-    <Footer />
+    <QueryClientProvider client={queryClient}>
+          <Header />
+            <hr />
+          {/* <Container /> */}
+          <RouterProvider router={router} />
+          <Footer />
+    </QueryClientProvider>
     </>
   )
 }
