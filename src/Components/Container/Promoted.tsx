@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import ImageCard from "../../Generics/ImageCard";
 import axios from "axios";
 
@@ -12,7 +12,7 @@ export default function Promoted () {
     const [index, setIndex] = useState<number>(0);
 
     useEffect(() => {
-        axios.get('http://localhost:8080/movie/5')
+        axios.get('http://localhost:8080/api/movie/promoted')
             .then(response => { 
                 // console.log(response.data);
                 setMovies(response.data);

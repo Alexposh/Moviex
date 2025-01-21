@@ -8,7 +8,7 @@ export default function Suggestions (){
     const [index, setIndex] = useState<number>(0);
 
     useEffect(() => {
-        axios.get('http://localhost:8080/movie/8')
+        axios.get('http://localhost:8080/api/movie/popular')
             .then(response => { 
                 // console.log(response.data);
                 setMovies(response.data);
@@ -28,6 +28,7 @@ export default function Suggestions (){
     const featuredMovies: Movie[] = movies.slice(index, index + 2);
     return(
       <div style={{display:"flex", border:"1px solid black", justifyContent:"center"}}>
+                 <h2>Suggestions</h2>
                  {featuredMovies.map((movie) => ( <FeaturedArticle key={movie.movie_id} movie={movie}/>))}                
               </div>
     )
