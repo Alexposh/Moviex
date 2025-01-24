@@ -4,7 +4,7 @@ import ImageCard from "./ImageCard";
 export default function FeaturedArticle ({movie}:{movie:Movie}){ 
     return (
         <>
-            <ImageCard key={movie.movie_id} title={movie.title}  width={270}/>
+            <ImageCard key={movie.movie_id} title={movie.title} imageKey={movie.imageKey} width={250}/>
         </>
        
      

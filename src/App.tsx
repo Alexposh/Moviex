@@ -9,8 +9,7 @@ import Footer from './Components/Footer';
 import ArtistsPage from './pages/ArtistsPage';
 import NotFoundPage from './pages/NotFoundPage';
 import { QueryClient, QueryClientProvider } from 'react-query';
-
-
+import Container from './Components/Container';
 
 const queryClient = new QueryClient();
 
@@ -44,7 +43,7 @@ const router = createBrowserRouter([
     <QueryClientProvider client={queryClient}>
           <Header />
             <hr />
-          {/* <Container /> */}
+          <Container />
           <RouterProvider router={router} />
           <Footer />
     </QueryClientProvider>

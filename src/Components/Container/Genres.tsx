@@ -19,9 +19,12 @@ export default function Genres (){
     }, []);
 
     return(<>
+    <div style={{display:"flex", margin:"20px 20px", height:"500px", border:"1px solid black", justifyContent:"center"}}>
+    <h3>Genres</h3>
     {genres.map((genre) => ( <GenreElement key={genre.genre_id} genre={genre}/>))}
+    </div>
     </>
         
-        // <h1>Genres</h1>
+        // 
     )
 }

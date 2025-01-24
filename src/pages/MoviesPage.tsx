@@ -9,17 +9,20 @@ export default function MoviesPage (){
 
     return(
         <>
-        <div>
-        {movies.map((movie) => (
-            <p><NavLink to={`/movies/${movie}`}
+        <div style={{display:"flex", border:"1px solid black", justifyContent:"center"}}>
+        <div style ={{     }} >
+        {movies.map((movie) => ( 
+            <p key={movie}><NavLink to={`/movies/${movie}`}
                     key={movie}     
                     className={({isActive}) => {return isActive ? "active" : ""}} 
                     style={({isActive})=>{return isActive ? {color:"red"} : {color:"green"}}}>
                         Movie number - {movie}
                 </NavLink>
             </p>))}
-        <Outlet/>
+            </div>
+            <div><Outlet/></div>      
         </div>
+        
             
         </>
     )

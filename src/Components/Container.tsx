@@ -1,4 +1,4 @@
-import Favorites from "./Container/Favorites";
+// import Favorites from "./Container/Favorites";
 import Featured from "./Container/Featured";
 import Genres from "./Container/Genres";
 import Promoted from "./Container/Promoted";
@@ -45,7 +45,7 @@ export default function Container(){
         <Popularartists />
         <Suggestions />
         <Topten />
-        <Favorites />
+        {/* <Favorites /> */}
         <Genres />
         </>
        
