@@ -10,33 +10,6 @@ import Topten from "./Container/Topten";
 
 export default function Container(){
 
-    // type Movie = {
-    //     movie_id: number, 
-    //     title: string,
-    //     budget: number,
-    //     homepage: string,
-    //     overview:string,
-    //     popularity: number,
-    //     release_date: string, 
-    //     revenue: number, 
-    //     runtime: number, 
-    //     movie_status: string, 
-    //     tagline: string, 
-    //     vote_average: number, 
-    //     vote_count: number
-    // };
-    // const [fetchedData, setFetchedData] = useState([] as Movie[]);
-   
-    // useEffect(() => { 
-    // axios.get('http://localhost/MoviexPhp/api.php')
-    //         .then(response => { setFetchedData(response.data); }) 
-    //         .catch(error => { 
-    //             console.error('There was an error fetching the data!', error); 
-    //         }); 
-     
-    //     });
-    
-
     return(
         <>   
 

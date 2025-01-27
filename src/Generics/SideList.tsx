@@ -5,12 +5,7 @@ function SideList({sidemovies}:{sidemovies:Movie[]}){
         <div>
         { sidemovies.map((movie) => (<SideMovie key={movie.movie_id} movie={movie}/>))
         }
-        </div>
-            
-               
-            
-           
-        
+        </div>         
     )
 }
 
