@@ -1,32 +1,41 @@
 // import { Movie } from "../Models/Movie";
 
 // import { useState } from "react";
-import { Link} from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { Movie } from "../Models/Movie";
 import { useQuery } from "react-query";
 import axios from "axios";
-import * as React from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import CardActionArea from '@mui/material/CardActionArea';
+// import PaginationElement from "../Components/Container/elements/PaginationElement";
+import { Pagination, Stack } from "@mui/material";
+// import { useState } from "react";
+
 // import { useEffect, useState } from "react";
 
 export default function MoviesPage (){
+    const page= useParams<{pageNumber:string | undefined}>();
+    const pageNumber = page.pageNumber !== undefined ? parseInt(page.pageNumber, 10) : 1;
+    const navigate = useNavigate(); // Initialize the navigate function
+    
+    const handleChange = (event:EventListener, value: number) => {
+        navigate(`/movies/p/${value}`); // Navigate to the selected page
+        console.log(value);
+        console.log(event);
+    };
 
-    // const movies:number[] = [1,2,3,4,5];
+
 
     const {data, isLoading, isError} = useQuery({
-        queryKey: ['movies'],
-        queryFn: () => axios.get('http://localhost:8080/api/movie').then(res => res.data),
+        queryKey: ['movies', pageNumber],
+        queryFn: () => axios.get(`http://localhost:8080/api/movie/p/${pageNumber}`).then(res => res.data), // http://localhost:8080/api/movie?page=${pageNr}
         staleTime: 60000, // 1 minute
         cacheTime: 300000, // 5 minutes
         refetchOnWindowFocus: false,
-    });
-
-
-   
+    });   
 
     if (isLoading) {    
         return <div>Loading...</div>;
@@ -36,7 +45,7 @@ export default function MoviesPage (){
     }
   
     const movies: Movie[] = Array.isArray(data) ? data : [];
-    console.log(movies);
+    // console.log(movies);
     return(
         <>
         <div style={{ 
@@ -56,6 +65,7 @@ export default function MoviesPage (){
                             height: '300px',
                             objectFit: 'contain',
                             marginLeft: '10%',
+                            maxHeight: "300px"
                         }}
                         component="img"
                         image={movie.imageKey ? `https://awkward-turquoise-hawk.myfilebase.com/ipfs/${movie.imageKey}` : "/poster.jpg"} 
@@ -75,9 +85,14 @@ export default function MoviesPage (){
         </div>
     ))}
     </div> 
-       
-        
-            
+    <div style={{ display: "flex", justifyContent: "center", width: "100%" }}>
+       <div style={{margin:"auto"}} >
+       <Stack spacing={2}>
+            <Pagination count={10} color="primary" page={pageNumber} // Set the active page
+                onChange={handleChange} />
+        </Stack>
+        </div>
+    </div>
         </>
     )
 }
