@@ -29,7 +29,8 @@ interface ExpandMoreProps extends IconButtonProps {
 }
 
 const ExpandMore = styled((props: ExpandMoreProps) => {
-  const { expand, ...other } = props; //expand, was also in the destructuring, but it was not used and just gave the red error
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { expand, ...other } = props; 
   return <IconButton {...other} />;
 })(({ theme }) => ({
   marginLeft: 'auto',
@@ -66,7 +67,7 @@ export default function MoviePage (){
         return <h1>No Data Available</h1>;
       }
    const movieImage = `https://awkward-turquoise-hawk.myfilebase.com/ipfs/${data.imageKey}`
-   const placeholderImage:string = "/wide.jpg";
+   const placeholderImage:string = "/poster.jpg";
    const handleExpandClick = () => {
     setExpanded(!expanded);
   };
