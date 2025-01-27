@@ -12,6 +12,7 @@ import Typography from '@mui/material/Typography';
 import CardActionArea from '@mui/material/CardActionArea';
 // import PaginationElement from "../Components/Container/elements/PaginationElement";
 import { Pagination, Stack } from "@mui/material";
+import { ChangeEvent } from "react";
 // import { useState } from "react";
 
 // import { useEffect, useState } from "react";
@@ -21,7 +22,7 @@ export default function MoviesPage (){
     const pageNumber = page.pageNumber !== undefined ? parseInt(page.pageNumber, 10) : 1;
     const navigate = useNavigate(); // Initialize the navigate function
     
-    const handleChange = (event:EventListener, value: number) => {
+    const handleChange = (event:ChangeEvent<unknown>, value: number) => {
         navigate(`/movies/p/${value}`); // Navigate to the selected page
         console.log(value);
         console.log(event);
