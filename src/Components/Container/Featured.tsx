@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import FeaturedArticle from "../../Generics/FeaturedArticle";
 import axios from "axios";
 import { Movie } from "../../Models/Movie";
+import { Link } from "react-router-dom";
+import { Typography } from "@mui/material";
 // import { useQuery } from "react-query";
 
 
@@ -42,9 +44,13 @@ export default function Featured (){
     return(
 
         <>        
-        <div style={{display:"flex", margin:"20px 20px",  height:"500px",border:"1px solid black", justifyContent:"center"}}>
-            <h2>Featured</h2>
+        <div style={{display:"flex", margin:"10px 20px", height:"auto", border:"1px solid black", justifyContent:"center"}}>
+            {/* <h2>Featured</h2> */}
            {featuredMovies.map((movie) => ( <FeaturedArticle key={movie.movie_id} movie={movie}/>))}
+           <Link to="/movies">
+        <Typography variant="h6" width={"120px"}>See all...
+        </Typography>
+        </Link>
         </div>
         </>
         

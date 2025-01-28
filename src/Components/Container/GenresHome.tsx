@@ -6,12 +6,12 @@ import { Link } from "react-router-dom";
 import { Typography } from "@mui/material";
 
 
-export default function Genres (){
+export default function GenresHome (){
 
     const [genres, setGenres] = useState<Genre[]>([]);
 
     useEffect(() => {
-        axios.get('http://localhost:8080/api/categories')
+        axios.get('http://localhost:8080/api/categories/home')
             .then(response => { 
                 // console.log(response.data);
                 setGenres(response.data);

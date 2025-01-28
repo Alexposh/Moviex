@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import Artist from "../../Generics/Artist";
 import axios from "axios";
 import { Role } from "../../Models/Role";
+import { Link } from "react-router-dom";
+import { Typography } from "@mui/material";
 
 export default function PopularRoles () {
     const [roles, setRoles] = useState<Role[]>([]);
@@ -33,6 +35,10 @@ export default function PopularRoles () {
     return(
         <div style={{display:"flex", height:"500px",  margin:"20px 20px", border:"1px solid black", justifyContent:"center"}}>
         {famousRoles.map((role) => ( <Artist key={role.person_id} role={role}/>))}
+        <Link to="/artists">
+        <Typography variant="h6" width={"120px"}>See all...
+        </Typography>
+        </Link>
         </div>
     )
 }

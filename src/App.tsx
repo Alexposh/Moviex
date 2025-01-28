@@ -10,6 +10,10 @@ import ArtistsPage from './pages/ArtistsPage';
 import NotFoundPage from './pages/NotFoundPage';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import Container from './Components/Container';
+import Genres from './Components/Container/Genres';
+import Promoted from './Components/Container/Promoted';
+import ImageCard from './Generics/ImageCard';
+// import GenresHome from './Components/Container/GenresHome';
 
 const queryClient = new QueryClient();
 
@@ -27,6 +31,14 @@ const router = createBrowserRouter([
     //   path: '/movies/:movieId',
     //   element: <MoviePage />,
     // }]
+  },
+  {
+    path: '/moviesfeatured',  
+    element: <Promoted />,
+    children:[{
+      path: '/moviesfeatured/:movieId',
+      element: <ImageCard />,
+    }]
   },
   {
     path: '/movies/:movieId',
@@ -47,6 +59,10 @@ const router = createBrowserRouter([
       path: '/artists/:artistId',
       element: <ArtistPage />,
     }]
+  },
+  {
+    path: '/genres',
+    element: <Genres />
   }
 ])
   return (

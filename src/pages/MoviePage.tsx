@@ -95,7 +95,10 @@ export default function MoviePage (){
         }
         action={
           <IconButton aria-label="settings">
-            <MoreVertIcon />
+            <Link to={`/`}>
+              <MoreVertIcon />
+            </Link>
+            
           </IconButton>
         }
         title={<Typography sx={{ fontSize: '1.5rem' }}>
