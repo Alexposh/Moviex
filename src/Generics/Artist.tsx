@@ -1,5 +1,7 @@
-import { Card } from "react-bootstrap";
+// import { Card } from "react-bootstrap";
 import { Role } from "../Models/Role";
+import { Avatar, ListItem, ListItemAvatar, ListItemText } from "@mui/material";
+
 // import { NavLink } from "react-router-dom";
 
 export default function Artist ({role}:{role: Role}) {
@@ -14,31 +16,17 @@ export default function Artist ({role}:{role: Role}) {
 
     return(
     <div style={{margin:"40px"}}>
-        {/* <h3>{role.character_name}  </h3> 
-        <p>played by </p>
-        <h4>{role.person_name}</h4> */}
+              
      
-          {/* <a href="#">Link */}
-              <Card style={{ width: '300px' }}>
-                <Card.Img variant="top" src={role.image ? artistImage : placeholderImage} width={200} />
-                  <Card.Body>
-                    <Card.Text>
-                      <span>{role.character_name}</span>  - 
-                      <span>played by </span>  - 
-                      <span>{role.person_name}</span>
-                    </Card.Text>         
-                  </Card.Body>
-              </Card>
-              {/* </a> */}
-         
-
-          {/* <NavLink to={`/movies/${role.person_id}`} */}
-                    {/* // key={role.person_id}     
-                    // className={({isActive}) => {return isActive ? "active" : ""}} 
-                    // style={({isActive})=>{return isActive ? {color:"red"} : {color:"green"}}}> */}
-                    
-                     <a href="">Open artist page - {role.person_name}</a>  
-                {/* </NavLink> */}
+        <div>
+        <ListItem sx={{width: '300px', height: '170px'}}>
+          <ListItemAvatar>
+            <Avatar alt={role.person_name} src={role.image ? artistImage : placeholderImage} sx={{ width: 160, height: 160 }}  />
+          </ListItemAvatar>
+          <ListItemText primary={role.person_name} secondary={role.character_name} sx={{ marginLeft: 2, fontSize: '1.2rem' }}/>
+        </ListItem>
+        </div>
+      
     </div>
      )
 }

@@ -3,7 +3,7 @@ import Artist from "../../Generics/Artist";
 import axios from "axios";
 import { Role } from "../../Models/Role";
 import { Link } from "react-router-dom";
-import { Typography } from "@mui/material";
+import { List, Typography } from "@mui/material";
 
 export default function PopularRoles () {
     const [roles, setRoles] = useState<Role[]>([]);
@@ -22,21 +22,38 @@ export default function PopularRoles () {
             });
 
         const interval = setInterval(() => {
-            setIndex(prevIndex => (prevIndex + 3) % roles.length);
+            setIndex(prevIndex => (prevIndex + 6) % roles.length);
             // console.log("randomising number :", index);
         }, 8000);
 
         return () => clearInterval(interval);
     }, [roles.length]);
 
-    const famousRoles: Role[] = roles.slice(index, index + 3);
+    const famousRoles: Role[] = roles.slice(index, index + 6);
 
 
     return(
-        <div style={{display:"flex", height:"500px",  margin:"20px 20px", border:"1px solid black", justifyContent:"center"}}>
-        {famousRoles.map((role) => ( <Artist key={role.person_id} role={role}/>))}
-        <Link to="/artists">
-        <Typography variant="h6" width={"120px"}>See all...
+        <div style={{display: "flex",
+            flexWrap: "wrap",
+            height: "620px",
+            margin: "10px 20px 20px 10px",
+            width: "1250px",
+            border: "1px solid black",
+            justifyContent: "center",
+            gap: "20px"}}>
+
+            
+        {famousRoles.map((role) => (
+            <List style={{ gridColumn: "span 3" }}>
+            <Link to={`/artist/${role.person_id}`}>
+
+                <Artist key={role.person_id} role={role}/>
+             </Link>
+             </List>))}
+             
+        
+        <Link to="/moviecast/22/1" >
+        <Typography variant="h6" width={"120px"} >See all...
         </Typography>
         </Link>
         </div>
