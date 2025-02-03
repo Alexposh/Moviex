@@ -1,73 +1,114 @@
-import axios from "axios";
-// import { ChangeEvent } from "react";
+// import axios from "axios";
+// import { Box, Button, Autocomplete, List, ListItemButton, ListItemText, TextField } from "@mui/material";
+// import { useEffect, useState } from "react";
+// import { Movie } from "../Models/Movie";
+// import { Link } from "react-router-dom";
+// import MovieCastItem from "./MovieCastItem";
 // import { useQuery } from "react-query";
-// import { NavLink, Outlet, useParams } from "react-router-dom";
 // import { CastMember } from "../Models/CastMember";
-import { Button, ButtonGroup, TextField } from "@mui/material";
-import { useState } from "react";
-import { Movie } from "../Models/Movie";
 
 
-export default function MovieCast (){
-    
-    // const [movieId, setMovieId] = useState(5);
+// interface MovieProps {
+//     title: string;
+//     id: number;
+// }
 
-    const searchInput = "Pirates";
-    const searchCriteria = searchInput.toLowerCase();
+export default function MovieCast() {
+    // const [inputValue, setInputValue] = useState(''); // the word that the user enters
 
-    const [movies, setMovies] = useState<Movie[]>([]);
+    // const searchCriteria = inputValue.toLowerCase(); // the search criteria that the query will use
 
-    // const pageNumber= useParams<{page:string | undefined}>();
-    // const movie_id = useParams<{movie:string | undefined}>();
-    // const pageNr = pageNumber.page !== undefined ? parseInt(pageNumber.page, 10) : 1;
-    // const movieId = movie_id.movie !== undefined ? parseInt(movie_id.movie, 10) : 1;
+    // const [movies, setMovies] = useState<MovieProps[]>([]); // the movies that match the search criteria
+    // // const [selectedIndex, setSelectedIndex] = useState(0); // the index of the selected movie in the list of movies resulted by the search
+    // // const [selectedMovie, setSelectedMovie] = useState(0); // the id of the selected movie from the listed options given by the list in the page
+    // const [optionsToShow, setOptionsToShow] = useState<string[]>([]); // the options that will be shown in the autocomplete
 
-    // const [inputValue, setInputValue] = useState('');
+    // useEffect(() => {
+    //     if (inputValue && inputValue.length > 2) {
+    //         searchMovies();
+    //     }
+    // }, [inputValue]); // only run the searchMovies function when the inputValue changes and it is larger that 2
 
     // const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     //     setInputValue(event.target.value);
-    // };
-    
+    //     console.log(movies);
+    //     console.log(inputValue);
+    // }; // update the inputValue when the user types
 
-    const searchMovies = () => {
-        alert(searchCriteria);  
-        axios.get(`http://localhost:8080/api/moviesearch/${searchCriteria}`).then(res => {
-            // setMovieId(res.data.movie_id);
-            setMovies(res.data);
-            console.log(res.data);
-        })
-        .catch(error => { 
-            console.error('There was an error fetching the data!', error); 
-        });
-    };
-// searchMovies();
+    // const handleListItemClick = (
+    //     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
+    //     index: number,
+    // ) => {
+    //     setSelectedIndex(index);
+    //     console.log(index);
+    //     setSelectedMovie(movies[index].movie_id);
+    //     console.log(selectedMovie);
+    //     setOptionsToShow([]);
+    // }; // update the selected index and determines which castmovie list to show when the user clicks on an option
+
     // const {data, isLoading, isError} = useQuery({
-    //     queryKey: ['movieSearched', movieId],
-    //     queryFn: () => axios.get(`http://localhost:8080/api/movie/${movieId}`).then(res => res.data), 
-    //     staleTime: 60000, // 1 minute
-    //     cacheTime: 300000, // 5 minutes
-    //     refetchOnWindowFocus: false,
-    // });  
+    //     queryKey: ['moviecast_item', selectedIndex],
+    //     queryFn: () => axios.get(`http://localhost:8080/api/moviecast/${selectedMovie}`).then(res => res.data),
+    // }); // gets the 
 
-    // // console.log(data);
-    // if (isLoading) {    
-    //     return <div>Loading...</div>;
+    //  if (isLoading) {    
+    // return <div>Loading...</div>;
     // }
     // if (isError) {
     //     return <div>Error fetching data</div>;
     // }
-    return(<>
-        <div style={{display:"flex", border:"1px solid black"}}> 
-        <div>Test</div>
-        
-        <Button variant="contained" onClick={() => {  searchMovies();  }}>Search</Button>
-        
-        </div>
-        <div>
-        {movies.map((movie) => ( <div key={movie.movie_id}>{movie.title} - {movie.movie_id}</div>))}
-    </div>
-    </> 
-               
-       
-    )
-}   
+
+    // const searchMovies = () => {
+    //     axios.get(`http://localhost:8080/api/moviesearch/${searchCriteria}`).then(res => {
+    //         setMovies(res.data);
+    //         setOptionsToShow(res.data.map((movie: Movie) => movie.title));
+    //         console.log(optionsToShow);
+    //     })
+    //     .catch(error => { 
+    //         console.error('There was an error fetching the data!', error); 
+    //     });
+    // };  // fetches the movies that match the search criteria
+
+    return (
+        <>
+        <p>test</p>
+            {/* <div style={{ display: "flex", border: "1px solid black" }}>
+                <Autocomplete
+                    // disablePortal
+                    options={optionsToShow}
+                    sx={{ width: 300 }}
+                    renderInput={(params) =>( <TextField  {...params} label="" onChange={handleInputChange} autoComplete="off" />)}
+                    onChange={(event, newValue) => {
+                        setInputValue(newValue || '');
+                    }}
+                />
+                <div>
+                    <Button variant="contained" onClick={searchMovies}>Search</Button>
+                </div>
+            </div> */}
+
+            <div>
+                {/* {inputValue && movies && (
+                    <Box sx={{ width: 320, maxWidth: 360, bgcolor: 'black' }}>
+                        <List component="nav" aria-label="movies list">
+                            {movies.map((movie) => (
+                                <ListItemButton
+                                    key={movie.movie_id}
+                                    selected={selectedIndex === movies.indexOf(movie)}
+                                    onClick={(event: React.MouseEvent<HTMLDivElement, MouseEvent>) => handleListItemClick(event, movies.indexOf(movie))}
+                                >
+                                    <Link to={`/movies/${movie.movie_id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                                    <ListItemText primary={movie.title} />
+                                   </Link>
+                                </ListItemButton>
+                            ))}
+                        </List>
+                    </Box>
+                )} */}
+            </div>
+
+            {/* {data && data.map((actor: CastMember) => {return(<MovieCastItem key={actor.person_id} actor={actor} />)})} */}
+           
+        </>
+    );
+}

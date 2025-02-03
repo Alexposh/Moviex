@@ -12,8 +12,9 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import Container from './Components/Container';
 import Genres from './Components/Container/Genres';
 // import ActorsPage from './pages/ActorsPage';
-import ActorPage from './pages/ActorPage';
+// import ActorPage from './pages/ActorPage';
 import MovieCast from './pages/MovieCast';
+// import MovieCastItem from './pages/MovieCastItem';
 // import Promoted from './Components/Container/Promoted';
 // import GenresHome from './Components/Container/GenresHome';
 
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
   {
     path: '/movies',  
     element: <MoviesPage />,
+    // children:[{
+    //   path: '/movies/:movieId',
+    // element: <MoviePage />,
+    // }]
    },
    {
     path: '/movies/:movieId',
@@ -44,8 +49,12 @@ const router = createBrowserRouter([
   },
   {
     path: '/moviecast',
-    element: <MovieCast />,    
+    element: <MovieCast />,      
   },
+  // {
+  //   path: '/moviecast/:movieId',
+  //   element: <MovieCastItem />,      
+  // },
   {
     path: '/artists',
     element: <ArtistsPage />,

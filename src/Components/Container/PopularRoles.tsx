@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import Artist from "../../Generics/Artist";
 import axios from "axios";
-import { Role } from "../../Models/Role";
 import { Link } from "react-router-dom";
 import { List, Typography } from "@mui/material";
+import { CastMember } from "../../Models/CastMember";
 
 export default function PopularRoles () {
-    const [roles, setRoles] = useState<Role[]>([]);
+    const [roles, setRoles] = useState<CastMember[]>([]);
     
     const [index, setIndex] = useState<number>(0);
 
@@ -29,7 +29,7 @@ export default function PopularRoles () {
         return () => clearInterval(interval);
     }, [roles.length]);
 
-    const famousRoles: Role[] = roles.slice(index, index + 6);
+    const famousRoles: CastMember[] = roles.slice(index, index + 6);
 
 
     return(
@@ -43,7 +43,7 @@ export default function PopularRoles () {
             gap: "20px"}}>
 
             
-        {famousRoles.map((role) => (
+        {famousRoles.map((role:CastMember) => (
             <List style={{ gridColumn: "span 3" }}>
             <Link to={`/artist/${role.person_id}`}>
 
