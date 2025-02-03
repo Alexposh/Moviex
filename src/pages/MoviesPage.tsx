@@ -4,12 +4,13 @@ import { Movie } from "../Models/Movie";
 import { useQuery } from "react-query";
 import axios from "axios";
 import { Autocomplete, Box, Button, List, ListItemButton, ListItemText, Pagination, Stack, TextField } from "@mui/material";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent,  EventHandler,  SyntheticEvent,  useState } from "react";
 import MoviePage from "./MoviePage";
+
 
 interface MovieProps {
     title: string;
-    id: number;
+    movie_id: number;
 }   
 
 
@@ -20,6 +21,9 @@ export default function MoviesPage (){
     const [selectedIndex, setSelectedIndex] = useState(0);
     const [selectedMovie, setSelectedMovie] = useState<Movie |null>(null);
     const [inputValue, setInputValue] = useState(''); // the word that the user enters
+    const [selectedValue, setSelectedValue] = useState("");
+    const [searchedMovie, setSearchedMovie] = useState<Movie |null>(null);
+    const [searchedMovies, setSearchedMovies] = useState<MovieProps[]|null>(null);
     const [optionsToShow, setOptionsToShow] = useState<string[]>([]);
     //  const movies: Movie[] = Array.isArray(data) ? data : [];
 
@@ -33,32 +37,32 @@ export default function MoviesPage (){
         
     });     
 
-    // useEffect(() => {
-    //     axios.get(`http://localhost:8080/api/moviesearch/${inputValue}`)
-    //         .then(res => res.data)        
-    //         // setOptionsToShow(dataAll.map((movie:MovieProps) => movie.title)); //dataAll.map((movie) => movie.title)
-    //         .then(res => { 
-    //             setOptionsToShow(res.map((movie:MovieProps) => movie.title));
-    //         }) 
-    //         .catch(error => { 
-    //             console.error('There was an error fetching the data!', error); 
-    //         });
-        
-    // }, [optionsToShow, inputValue]);
-
-
     const getMovieNames = (inputValue:string) => {
         axios.get(`http://localhost:8080/api/moviesearch/${inputValue}`)
         .then(res => res.data)        
         // setOptionsToShow(dataAll.map((movie:MovieProps) => movie.title)); //dataAll.map((movie) => movie.title)
         .then(res => { 
+            setSearchedMovies(res);
             setOptionsToShow(res.map((movie:MovieProps) => movie.title));
         }) 
         .catch(error => { 
-            console.error('There was an error fetching the data!', error); 
+            console.error('There was an error fetching the data for the names of the movies!', error); 
         });
     }
-      
+    
+    const getSearchedMovie = (id:number) => {
+        // const idOfSelectedMovie = searchedMovies.find((movie:MovieProps) => movie.title === name)?.id;
+        // console.log(idOfSelectedMovie);
+        axios.get(`http://localhost:8080/api/movie/${id}`)
+        .then(res => res.data)        
+        // setOptionsToShow(dataAll.map((movie:MovieProps) => movie.title)); //dataAll.map((movie) => movie.title)
+        .then(res => { 
+            setSearchedMovie(res);
+        }) 
+        .catch(error => { 
+            console.error('There was an error fetching the data for the searched movie!', error); 
+        });
+    }
     // const navigate = useNavigate(); // Initialize the navigate function
    
     // the index of the selected movie in the list of movies resulted by the search
@@ -72,11 +76,16 @@ export default function MoviesPage (){
     };
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        
         setInputValue(event.target.value);       
         console.log(inputValue);
         getMovieNames(inputValue);
+      
     }; // update the inputValue when the user types
 
+    const handleAutocompleteChange = (event: React.SyntheticEvent<Element, Event>, newValue: string) => {
+        setSelectedValue(newValue);
+    };
     const handleListItemClick = (
         event: React.MouseEvent<HTMLDivElement, MouseEvent>,
         index: number,
@@ -85,7 +94,7 @@ export default function MoviesPage (){
         if (data && data.length > index) {
             setSelectedMovie(data[index]);
         }
-    };// update the selected index and determines which castmovie list to show when the user clicks on an option
+    };// update the selected index and determines which castmovie list to show when the user clicks on an option    v//getSearchedMovie(selectedIndex)
 
      
 
@@ -95,10 +104,45 @@ export default function MoviesPage (){
     if (isError) {
         return <div>Error fetching data</div>;
     }  
-    
-    
-    
-    
+      
+    const handleClick = () => {
+        let idOfSelectedMovie: number | undefined;
+        
+        // alert(`Selected value: ${selectedValue}`);
+        // console.log(searchedMovies);
+        // console.log(selectedValue);
+        // console.log(selectedValue.toLowerCase());
+        
+        if (searchedMovies !== null && searchedMovies.length > 0) {
+            // console.log(searchedMovies[0].title === selectedValue);
+            // console.log(searchedMovies?.length);
+            // console.log(searchedMovies.filter((movie:MovieProps) => movie.title === selectedValue)[0].movie_id);
+            idOfSelectedMovie = searchedMovies.find((movie:MovieProps) => movie.title === selectedValue)?.movie_id;
+            // console.log(idOfSelectedMovie);
+
+        }
+        
+        if (idOfSelectedMovie !== undefined) {
+            getSearchedMovie(idOfSelectedMovie);
+          }
+        setSelectedMovie(searchedMovie); 
+
+    };
+    // function MyFormHelperText() {
+    //     const { focused } = useFormControl() || {};
+      
+    //     const helperText = useMemo(() => {
+    //       if (focused) {
+    //         return 'This field is being focused';
+    //       }
+
+          
+      
+    //       return 'Helper text';
+    //     }, [focused]);
+      
+    //     return <FormHelperText>{helperText}</FormHelperText>;
+    //   }
     return(
         <>
         <div style={{ 
@@ -109,13 +153,19 @@ export default function MoviesPage (){
             margin: "20px"}}>
             <div style={{ 
                 display: "flex"}}>
+                    
                 <Autocomplete
                         // disablePortal
                         options={optionsToShow}
-                        sx={{ width: 300 }}
-                        renderInput={(params) =>( <TextField  {...params} label="" onChange={handleInputChange} autoComplete="off" />)}                        
-                    />                    
-                <Button variant="contained" sx={{marginLeft: 2, height: 50, width: 100}}>Search</Button>
+                        sx={{ width: 400 }}
+                        renderInput={(params) =>( <TextField label="selected-movie" {...params}  value={inputValue} onChange={handleInputChange} 
+                        autoComplete="off"
+                        // onSelect={(event) => console.log(event.target.value)}
+                        />)}   
+                        onChange={handleAutocompleteChange}                     
+                    />           
+                <Button variant="contained" sx={{marginLeft: 2, height: 50, width: 100}} onClick={handleClick}>Search</Button> 
+                
             </div>
             <div>
                 <div style={{ display: "flex", justifyContent: "center", width: "100%" }}> 

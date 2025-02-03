@@ -103,8 +103,7 @@ export default function MoviePage ({movie}:{movie:Movie}){
           </IconButton>
         }
         title={<Typography sx={{ alignItems: 'center', fontSize: '1.5rem' }}>
-        {data.title} - 
-        {data.movie_id}
+        {data.title} 
       </Typography>}
         subheader={ "Released on " + data.release_date }
        

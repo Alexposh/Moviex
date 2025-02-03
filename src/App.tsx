@@ -2,7 +2,7 @@ import './App.css'
 import Header from './Components/Header'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import MoviesPage from './pages/MoviesPage';
-import MoviePage from './pages/MoviePage';
+// import MoviePage from './pages/MoviePage';
 // import HomePage from './pages/HomePage';
 import ArtistPage from './pages/ArtistPage';
 import Footer from './Components/Footer';
@@ -35,10 +35,10 @@ const router = createBrowserRouter([
     // element: <MoviePage />,
     // }]
    },
-   {
-    path: '/movies/:movieId',
-    element: <MoviePage />,
-  },
+  //  {
+  //   path: '/movies/:movieId',
+  //   element: <MoviePage />,
+  // },
   {
     path: '/movies/p/:pageNumber',
     element: <MoviesPage />,
