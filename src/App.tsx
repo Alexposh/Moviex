@@ -14,6 +14,7 @@ import Genres from './Components/Container/Genres';
 // import ActorsPage from './pages/ActorsPage';
 // import ActorPage from './pages/ActorPage';
 import MovieCast from './pages/MovieCast';
+import MovieFeatured from './pages/MovieFeatured';
 // import MovieCastItem from './pages/MovieCastItem';
 // import Promoted from './Components/Container/Promoted';
 // import GenresHome from './Components/Container/GenresHome';
@@ -22,23 +23,19 @@ const queryClient = new QueryClient();
 
 function App() {
 const router = createBrowserRouter([
-  {
+   {
     path: "/",
     element: <Container />,
     errorElement: <NotFoundPage />
-  },
-  {
+   },
+   {
     path: '/movies',  
     element: <MoviesPage />,
-    // children:[{
-    //   path: '/movies/:movieId',
-    // element: <MoviePage />,
-    // }]
    },
-  //  {
-  //   path: '/movies/:movieId',
-  //   element: <MoviePage />,
-  // },
+   {
+    path: '/movies/:movieId',
+    element: <MovieFeatured />,
+  },
   {
     path: '/movies/p/:pageNumber',
     element: <MoviesPage />,
@@ -51,10 +48,6 @@ const router = createBrowserRouter([
     path: '/moviecast',
     element: <MovieCast />,      
   },
-  // {
-  //   path: '/moviecast/:movieId',
-  //   element: <MovieCastItem />,      
-  // },
   {
     path: '/artists',
     element: <ArtistsPage />,

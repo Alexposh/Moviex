@@ -3,7 +3,7 @@ import { Movie } from "../../Models/Movie";
 import axios from "axios";
 import FeaturedArticle from "../../Generics/FeaturedArticle";
 import { Link } from "react-router-dom";
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 // import { useQuery } from "react-query";
 
 export default function Suggestions (){
@@ -39,13 +39,12 @@ export default function Suggestions (){
     // if(isLoading) return <h2>Loading...</h2>;
 
     return(
-      <div style={{display:"flex", margin:"10px 20px", height:"auto", border:"1px solid black", justifyContent:"center"}}>
+        <Box component="section" sx={{ p: 2, border: '1px dashed grey', display: "flex", marginLeft: 10, marginRight: 10, height: "auto" }}>  
                  {/* <h2>Suggestions</h2> */}
                  {featuredMovies.map((movie:Movie) => ( <FeaturedArticle key={movie.movie_id} movie={movie}/>))}  
-                 <Link to="/movies">
-        <Typography variant="h6" width={"120px"}>See all...
-        </Typography>
-        </Link>              
-              </div>
+                <Link to="/movies">
+                    <Typography variant="h6" width={"120px"}>See all...</Typography>
+                </Link>              
+        </Box>
     )
 }

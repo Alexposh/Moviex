@@ -1,19 +1,13 @@
 import { useState, useEffect } from 'react';
 import ImageCard from "../../Generics/ImageCard";
-// import axios from "axios";
-// import { useQuery } from 'react-query';
 import SideList from '../../Generics/SideList';
 import { Movie } from '../../Models/Movie';
 import axios from 'axios';
+import { Box } from '@mui/material';
 
 export default function Promoted () {
     const [movies, setMovies] = useState<Movie[]>([]);
     const [index, setIndex] = useState<number>(0);
-    // const {data, isLoading} = useQuery({
-    //     queryKey: ['movies'],
-    //     queryFn: () => axios.get('http://localhost:8080/api/movie/promoted').then(res => res.data),
-    // });
-
 
     useEffect(() => {
         axios.get('http://localhost:8080/api/movie/promoted')
@@ -34,24 +28,19 @@ export default function Promoted () {
     const highlightedElement: Movie = movies[index];
     const restElements: Movie[] = movies.filter((movie:Movie) => movie.movie_id !== highlightedElement.movie_id);
   
-    // if (isLoading) {
-    //     return <div>Loading...</div>;
-    // }
-
     return(
         <>
-        <div style={{display:"flex", margin:"10px 20px", height:"auto",  justifyContent:"center"}}>    
-          
+        <Box component="section" sx={{ p: 2, border: '1px dashed grey', display: "flex", marginLeft: 10, marginRight: 10, height: "auto" }}>              
             {highlightedElement && <ImageCard key={ highlightedElement.movie_id} 
-                                              id={highlightedElement.movie_id} 
-                                              title={highlightedElement.title} 
-                                              imageKey={highlightedElement.imageKey} 
-                                              width={250} 
-                                              height={400}/>
+                                            id={highlightedElement.movie_id} 
+                                            title={highlightedElement.title} 
+                                            imageKey={highlightedElement.imageKey} 
+                                            width={250} 
+                                            height={400}/>
             }     
-
             <SideList sidemovies={restElements}/>
-        </div>
+        </Box>
+       
         </>
     )
 }

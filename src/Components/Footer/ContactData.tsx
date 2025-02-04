@@ -1,5 +1,11 @@
+import CopyrightIcon from '@mui/icons-material/Copyright';
+import { Typography } from '@mui/material';
+
 export default function ContactData (){
     return(
-        <span>Contact Data</span>
+     
+        <>
+             <Typography><CopyrightIcon color="action" fontSize="small" sx={{marginLeft: "10px"}} /> Copyright MovieX </Typography>
+        </>
     )
 }   

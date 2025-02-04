@@ -20,11 +20,11 @@ export default function Artist ({role}:{role: CastMember}) {
               
      
         <div>
-        <ListItem sx={{width: '300px', height: '170px'}}>
+        <ListItem sx={{width: '260px', height: '50px'}}>
           <ListItemAvatar>
-            <Avatar alt={role.person_name} src={role.image ? artistImage : placeholderImage} sx={{ width: 160, height: 160 }}  />
+            <Avatar alt={role.person_name} src={role.image ? artistImage : placeholderImage} sx={{ width: 60, height: 60 }}  />
           </ListItemAvatar>
-          <ListItemText primary={role.person_name} secondary={role.character_name} sx={{ marginLeft: 2, fontSize: '1.2rem', color: 'white' }}/>
+          <ListItemText primary={role.person_name} secondary={role.character_name} sx={{ marginLeft: 2, fontSize: '1.2rem', color: 'black' }}/>
         </ListItem>
         </div>
       

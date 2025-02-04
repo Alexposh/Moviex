@@ -4,7 +4,7 @@ import { Movie } from "../Models/Movie";
 import { useQuery } from "react-query";
 import axios from "axios";
 import { Autocomplete, Box, Button, List, ListItemButton, ListItemText, Pagination, Stack, TextField } from "@mui/material";
-import { ChangeEvent,  EventHandler,  SyntheticEvent,  useState } from "react";
+import { ChangeEvent, useState } from "react";
 import MoviePage from "./MoviePage";
 
 
@@ -83,9 +83,14 @@ export default function MoviesPage (){
       
     }; // update the inputValue when the user types
 
-    const handleAutocompleteChange = (event: React.SyntheticEvent<Element, Event>, newValue: string) => {
-        setSelectedValue(newValue);
-    };
+    const handleAutocompleteChange = (
+        event: React.SyntheticEvent<Element, Event>,
+        value: string | null
+      ) => {
+        if (value !== null) {
+          setSelectedValue(value);
+        }
+      };
     const handleListItemClick = (
         event: React.MouseEvent<HTMLDivElement, MouseEvent>,
         index: number,
@@ -128,21 +133,7 @@ export default function MoviesPage (){
         setSelectedMovie(searchedMovie); 
 
     };
-    // function MyFormHelperText() {
-    //     const { focused } = useFormControl() || {};
-      
-    //     const helperText = useMemo(() => {
-    //       if (focused) {
-    //         return 'This field is being focused';
-    //       }
-
-          
-      
-    //       return 'Helper text';
-    //     }, [focused]);
-      
-    //     return <FormHelperText>{helperText}</FormHelperText>;
-    //   }
+   
     return(
         <>
         <div style={{ 
@@ -189,12 +180,8 @@ export default function MoviesPage (){
                                 
                     </Box>    
 
-                    {selectedMovie && <MoviePage key={selectedMovie.movie_id} movie={selectedMovie} />}
-
-                   
-                    {/* <MoviePage movie={selectedMovie} /> */}
-                    
-                </div>
+                    {selectedMovie && <MoviePage key={selectedMovie.movie_id} movie={selectedMovie} />}                 
+            </div>
                
             </div>
             <div style={{margin:"auto"}} >

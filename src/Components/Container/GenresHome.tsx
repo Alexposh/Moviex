@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Genre } from "../../Models/Genre";
 import GenreElement from "../../Generics/GenreElement";
 import { Link } from "react-router-dom";
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 
 
 export default function GenresHome (){
@@ -21,21 +21,15 @@ export default function GenresHome (){
             });
     }, []);
 
-    return(<>
-    <div style={{display:"flex", margin:"20px 20px", height:"auto", border:"1px solid black", justifyContent:"center"}}>
-    {/* <h3>Genres</h3> */}
-    {genres.map((genre) => ( <GenreElement key={genre.genre_id} genre={genre}/>))}
-    
-        <Link to="/genres">
-        <Typography variant="h6" width={"120px"}>See all...
-        </Typography>
-        </Link>
+    return(
+    <>
+    <Box component="section" sx={{ p: 2, border: '1px dashed grey', display: "flex", marginLeft: 10, marginRight: 10, height: "auto" }}>  
         
-    
-    </div>
-    
+        {genres.map((genre) => ( <GenreElement key={genre.genre_id} genre={genre}/>))}        
+          <Link to="/genres">
+            <Typography variant="h6" width={"120px"}>See all...</Typography>            
+          </Link>          
+    </Box>
     </>
-        
-        // 
     )
 }

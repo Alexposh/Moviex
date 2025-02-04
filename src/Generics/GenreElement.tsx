@@ -12,13 +12,13 @@ export default function GenreElement ({ genre}:{ genre: Genre}) {
 
     return(
         <>
-        <div style={{margin:"40px"}}>
+        <div style={{margin:"20px"}}>
         <Link to={`/genres/${genre.genre_id}`}>
         <Card sx={{ maxWidth: 345 }}>
       <CardActionArea>
         <CardMedia
           component="img"
-          height="340"
+          height="240"
           image={genre.genre_imageKey ? movieImage : placeholderImage}
           alt={genre.genre_name}
         />
